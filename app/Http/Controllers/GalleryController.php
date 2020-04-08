@@ -10,4 +10,9 @@ class GalleryController extends Controller
     {
         return view('gallery');
     }
+
+    public function edit()
+    {
+        return view('editgallery');
+    }
 }

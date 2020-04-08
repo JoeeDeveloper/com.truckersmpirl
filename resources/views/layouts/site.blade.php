@@ -10,6 +10,8 @@
 
     <title>{{ $pageTitle ?? '' }} | {{ config('app.name') }}</title>
 
+    <link rel="icon" href="{{ asset('/img/favicon.ico') }}" type="image/x-icon"/>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -25,6 +27,8 @@
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/landing-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <!-- JS Loaded First -->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     @yield('head')
 </head>
 
@@ -45,9 +49,15 @@
                         href="{{ url('/') }}">Home</a>
                 </li>
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('calendar')) ? 'active' : '' }}"
-                            href="{{ url('/calendar') }}">Calendar</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Calendar
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('/calendar') }}">View Calendar</a>
+                            <a class="dropdown-item" href="{{ url('/calendar/edit') }}">Edit Calendar</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('gallery')) ? 'active' : '' }}"
@@ -130,7 +140,7 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     @yield('js')
 </body>

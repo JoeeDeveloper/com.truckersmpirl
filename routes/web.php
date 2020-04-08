@@ -21,7 +21,9 @@ Route::get('/', 'WelcomeController@index')->name('welcome');
 // Authorised routes only
 Route::middleware('auth')->group(function () {
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
+    Route::get('/calendar/edit', 'CalendarController@edit')->name('calendarEdit');
     Route::get('/gallery', 'GalleryController@index')->name('gallery');
+    Route::get('/gallery/edit', 'GalleryController@edit')->name('galleryEdit');
 });
 
 // Route::get('/home', 'HomeController@index')->name('home');
