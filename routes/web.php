@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Public routes
+Route::get('/', 'WelcomeController@index')->name('welcome');
+
+// Authorised routes only
+Route::middleware('auth')->group(function () {
+    Route::get('/calendar', 'CalendarController@index')->name('calendar');
+    Route::get('/gallery', 'GalleryController@index')->name('gallery');
+});
+
+// Route::get('/home', 'HomeController@index')->name('home');
