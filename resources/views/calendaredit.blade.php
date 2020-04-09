@@ -3,9 +3,13 @@
     <link href="{{ asset('vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
     <script src="{{ asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
-$('#datepicker .datepicker').datepicker({
-    todayBtn: "linked"
-});
+    $(document).ready(function () {
+
+        $('#input-group .input-group.date').datepicker({
+            todayBtn: "linked"
+        });
+
+    })
 </script>
 @endsection
 @section('content')
@@ -24,12 +28,15 @@ $('#datepicker .datepicker').datepicker({
                         placeholder="Enter event description.">
                 </div>
                 <div class="form-group">
-                    <div class="input-daterange input-group" id="datepicker">
-                        <input type="text" class="input-sm form-control" name="start" />
+                    {{-- <div class="input-daterange input-group" id="datepicker">
+                        <input type="text" class="input-sm form-control" name="start"/>
                         <span class="input-group-addon">to</span>
                         <input type="text" class="input-sm form-control" name="end" />
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button> --}}
+                    <div class="input-group">
+                    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    </div>
                 </form>
             </div>
         </div>

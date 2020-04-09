@@ -17,6 +17,10 @@ Auth::routes();
 
 // Public routes
 Route::get('/', 'WelcomeController@index')->name('welcome');
+// Redirects
+Route::redirect('/discord', 'https://discord.gg/xCju3qz');
+Route::redirect('/twitter', 'https://twitter.com/truckersmp');
+Route::redirect('/truckersmp', 'https://truckersmp.com');
 
 // Authorised routes only
 Route::middleware('auth')->group(function () {
