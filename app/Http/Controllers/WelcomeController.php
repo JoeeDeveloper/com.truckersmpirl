@@ -16,7 +16,7 @@ class WelcomeController extends Controller
         } else {
             $randomImage = asset('storage/img/site-header/') . '/' . array_rand($files) . '.jpg';
         }
-
+// testingdeployer
         return view('welcome', compact('randomImage', 'files'));
 
     }
