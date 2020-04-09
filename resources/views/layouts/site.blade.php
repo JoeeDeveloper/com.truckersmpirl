@@ -46,7 +46,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}"
-                        href="{{ url('/') }}">test</a>
+                        href="{{ url('/') }}">test2</a>
                 </li>
                 @auth
                     <li class="nav-item dropdown">
