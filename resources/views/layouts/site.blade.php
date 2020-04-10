@@ -51,9 +51,23 @@
                 </li>
                 @auth
                 <li class="nav-item">
-                    <a class="nav-link {{ (request()->is('/calendar')) ? 'active' : '' }}"
+                    <a class="nav-link {{ (request()->is('calendar')) ? 'active' : '' }}"
                         href="{{ url('/calendar') }}">Calendar</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->is('eventstable')) ? 'active' : '' }}"
+                        href="{{ url('/eventstable') }}">Events Table</a>
+                </li>
+                @can('admin access')
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin
+                    </a>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ url('/admin/users') }}">User Table</a>
+                    </div>
+                </li>
+                @endcan
                 @endauth
             </ul>
             <div class="float-right">

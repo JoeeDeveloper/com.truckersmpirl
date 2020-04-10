@@ -84,9 +84,23 @@ class EventController extends Controller
     }
 
     public function table(){
-        $events = Event::all();
-        $eventsDeleted = Event::withTrashed();
 
-        return view('eventstable', compact('events', 'eventsDeleted'));
+        if (request()->has('deleted')) {
+            $events = Event::withTrashed()->get();
+        } else {
+            $events = Event::all();
+        }
+
+        return view('eventstable', compact('events'));
+    }
+
+    public function restore(Event $event){
+
+        dd($event);
+        $event->restore();
+
+        toastr()->success("Event succesfully restored!");
+
+        return redirect('/events/' . $event->id);
     }
 }

@@ -26,16 +26,37 @@ Route::redirect('/truckersmp', 'https://truckersmp.com');
 
 // Authorised routes only
 Route::middleware('auth')->group(function () {
+    // View Calendar (auth)
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
-    Route::view('/create', 'createevent');
-    Route::post('/create/event', 'EventController@create')->name('createEvent');
+    // View events table (auth)
     Route::get('/eventstable', 'EventController@table')->name('eventsTable');
-    // Events Routes
+
     Route::prefix('events')->group(function () {
-            Route::get('/{event}', 'EventController@index')->name('event');
-            Route::post('/{event}/attend', 'EventController@attend')->name('attendEvent');
-            Route::post('/{event}/delete', 'EventController@delete')->name('deleteEvent');
+        // View event (auth)
+        Route::get('/{event}', 'EventController@index')->name('event');
+        // Attend event (auth)
+        Route::post('/{event}/attend', 'EventController@attend')->name('attendEvent');
+    });
+    // Can manage events
+    Route::group(['middleware' => ['can:manage events']], function () {
+        // Can view create event (auth, manage events)
+        Route::view('/create', 'createevent');
+        // Create event (auth. manage events)
+        Route::post('/create/event', 'EventController@create')->name('createEvent');
+
+        Route::prefix('events')->group(function () {
+            // can update event (auth, manage events)
             Route::post('/{event}/update', 'EventController@update')->name('updateEvent');
+            // can delete event (auth, manage events)
+            Route::post('/{event}/delete', 'EventController@delete')->name('deleteEvent');
+            // can restore event (auth, manage events)
+            Route::post('/{event}/restore', 'EventController@restore')->name('restoreEvent');
+        });
+
+    });
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/users', 'AdminController@usersIndex')->name('adminUsers');
     });
 });
 

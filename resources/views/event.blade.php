@@ -2,6 +2,7 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-2">
+        @can('manage events')
         <div class="card shadow">
             <div class="card-header">
                 <h2>Edit Event</h2>
@@ -36,6 +37,7 @@
                     </div>
             </div>
         </div>
+                @endcan
     </div>
     <div class="col-md-4">
         <div class="card shadow">

@@ -46,11 +46,11 @@
                 <div class="features-icons-item mx-auto mb-0 mb-lg-3">
                     <div class="features-icons-icon d-flex">
                         <span style="color: #007bff; display: inline-block; text-align: center;">
-                            <i class="far fa-images fa-2x"></i>
+                            <i class="fas fa-users fa-2x"></i>
                         </span>
                     </div>
-                    <h3>Awesome online gallery.</h3>
-                    <p class="lead mb-0">View all the pictures from the previous meetups in one place.</p>
+                    <h3>Join the other {{ $userCount }} users!</h3>
+                    <p class="lead mb-0">We've currently got {{ $userCount }} users signed up and it will only go up!</p>
                 </div>
             </div>
         </div>
