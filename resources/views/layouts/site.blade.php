@@ -27,8 +27,9 @@
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/landing-page.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    @toastr_css
     <!-- JS Loaded First -->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    @jquery
     @yield('head')
 </head>
 
@@ -49,20 +50,10 @@
                         href="{{ url('/') }}">Home</a>
                 </li>
                 @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Calendar
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ url('/calendar') }}">View Calendar</a>
-                            <a class="dropdown-item" href="{{ url('/calendar/edit') }}">Edit Calendar</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('gallery')) ? 'active' : '' }}"
-                            href="{{ url('/gallery') }}">Gallery</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->is('/calendar')) ? 'active' : '' }}"
+                        href="{{ url('/calendar') }}">Calendar</a>
+                </li>
                 @endauth
             </ul>
             <div class="float-right">
@@ -93,25 +84,18 @@
         </div>
     </div>
     <!-- Footer -->
+
     <footer class="footer bg-light mt-auto">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
                     <ul class="list-inline mb-2">
                         <li class="list-inline-item">
-                            <a href="#">About</a>
+                            <a href="{{ url('/terms-of-service')}}">Terms of Service</a>
                         </li>
                         <li class="list-inline-item">&sdot;</li>
                         <li class="list-inline-item">
-                            <a href="#">Contact</a>
-                        </li>
-                        <li class="list-inline-item">&sdot;</li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                        <li class="list-inline-item">&sdot;</li>
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
+                            <a href="{{ url('/privacy-policy')}}">Privacy Policy</a>
                         </li>
                     </ul>
                     <p class="text-muted small mb-4 mb-lg-0">Copyright &copy; Joe Alderdice {{ now()->year }}</p>
@@ -120,17 +104,17 @@
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
                             <a href="{{ url('/truckersmp')}}">
-                                <i class="fas fa-question fa-2x fa-fw"></i>
+                                <i class="fas fa-truck-moving fa-2x"></i>
                             </a>
                         </li>
                         <li class="list-inline-item mr-3">
                             <a href="{{ url('/discord') }}">
-                                <i class="fab fa-discord fa-2x fa-fw"></i>
+                                <i class="fab fa-discord fa-2x"></i>
                             </a>
                         </li>
                         <li class="list-inline-item mr-3">
                             <a href="{{ url('/twitter') }}">
-                                <i class="fab fa-twitter fa-2x fa-fw"></i>
+                                <i class="fab fa-twitter fa-2x"></i>
                             </a>
                         </li>
                     </ul>
@@ -142,6 +126,8 @@
     <!-- Bootstrap core JavaScript -->
 
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    @toastr_js
+    @toastr_render
     @yield('js')
 </body>
 

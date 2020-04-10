@@ -15,7 +15,8 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
             plugins: ['dayGrid','bootstrap'],
             themeSystem: 'bootstrap',
-            height: 600
+            height: 600,
+            events: {!! $events !!}
         });
 
         calendar.render();
@@ -26,7 +27,7 @@
 @endsection
 @section('content')
 <div class="col-md-12 center">
-    <div class="card">
+    <div class="card shadow">
         <div class="card-header">Events Calendar</div>
         <div class="card-body">
             <div id='calendar'></div>
