@@ -28,7 +28,7 @@
 @section('content')
 <div class="col-md-12 center">
     <div class="card shadow">
-        <div class="card-header">Events Calendar</div>
+        <div class="card-header">Events Calendar <a href="{{ url('/create') }}" class="btn btn-primary float-right">Create Event</a></div>
         <div class="card-body">
             <div id='calendar'></div>
         </div>

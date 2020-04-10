@@ -1,31 +1,39 @@
 @extends('layouts.site', ['pageTitle' => $event->title])
 @section('content')
-<div class="row justify-content-md-center">
+<div class="row justify-content-center">
     <div class="col-md-2">
         <div class="card shadow">
             <div class="card-header">
                 <h2>Edit Event</h2>
             </div>
             <div class="card-body">
-                <form action="">
+                <form action="{{ route('updateEvent', $event) }}" method="POST">
+                    @csrf
                     <div class="form-group">
-                        <label for="name">Event Name:</label>
+                        <label for="name">Event Name</label>
                         <input type="text" class="form-control" name="name" id="name" value="{{ $event->title }}">
                     </div>
                     <div class="form-group">
-                        <label for="name">Event Details:</label>
-                        <textarea type="text" class="form-control" name="name" id="name"
-                            value="{{ $event->title }}"></textarea>
+                        <label for="description">Event Description</label>
+                        <input type="text" class="form-control" name="description" id="description" value="{{ $event->description }}">
                     </div>
                     <div class="form-group">
+                        <label for="date">Event Date/s</label>
+                        <div class="row">
+                        <div class="col"><input type="date" class="form-control" name="startDate" id="startDate" value="{{ $event->date_start }}"></div>
+                            <div class="col"><input type="date" class="form-control" name="finishDate" id="finishDate" value="{{ $event->date_finish }}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Update Event</button>
                     </div>
                 </form>
-                                        <form method="POST" action="{{ route('deleteEvent', $event->id) }}">
+                    <div class="form-group">
+                        <form action="{{ route('deleteEvent', $event) }}" method="post">
                             @csrf
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-danger">Delete Event</button>
-                            </div>
+                            <button type="submit" class="btn btn-danger">Delete Event</button>
                         </form>
+                    </div>
             </div>
         </div>
     </div>

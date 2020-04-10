@@ -47,6 +47,46 @@ class EventController extends Controller
         toastr()->success('Event successfully deleted.');
         $event->delete();
 
-        return redirect('/calendar')->with('toastr()->error("An error has occurred please try again later.");');
+        return redirect('/calendar');
+    }
+
+    public function create(Request $request, Event $event){
+
+        $newEvent = new Event;
+
+        $newEvent->title = $request->name;
+        $newEvent->description = $request->description;
+        $newEvent->date_start = $request->startDate;
+        $newEvent->date_finish = $request->finishDate;
+
+        $newEvent->save();
+
+        toastr()->success("Event succesfully created!");
+
+        return redirect('/events/'.$newEvent->id);
+    }
+
+    public function update(Request $request, Event $event)
+    {
+
+        $updateEvent = Event::find($event->id);
+
+        $updateEvent->title = $request->name;
+        $updateEvent->description = $request->description;
+        $updateEvent->date_start = $request->startDate;
+        $updateEvent->date_finish = $request->finishDate;
+
+        $updateEvent->save();
+
+        toastr()->success("Event succesfully updated!");
+
+        return back();
+    }
+
+    public function table(){
+        $events = Event::all();
+        $eventsDeleted = Event::withTrashed();
+
+        return view('eventstable', compact('events', 'eventsDeleted'));
     }
 }

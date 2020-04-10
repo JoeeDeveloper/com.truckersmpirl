@@ -27,9 +27,16 @@ Route::redirect('/truckersmp', 'https://truckersmp.com');
 // Authorised routes only
 Route::middleware('auth')->group(function () {
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
-    Route::get('/events/{event}', 'EventController@index')->name('event');
-    Route::post('/events/{event}/attend', 'EventController@attend')->name('attendEvent');
-    Route::post('/events/{event}/delete', 'EventController@delete')->name('deleteEvent');
+    Route::view('/create', 'createevent');
+    Route::post('/create/event', 'EventController@create')->name('createEvent');
+    Route::get('/eventstable', 'EventController@table')->name('eventsTable');
+    // Events Routes
+    Route::prefix('events')->group(function () {
+            Route::get('/{event}', 'EventController@index')->name('event');
+            Route::post('/{event}/attend', 'EventController@attend')->name('attendEvent');
+            Route::post('/{event}/delete', 'EventController@delete')->name('deleteEvent');
+            Route::post('/{event}/update', 'EventController@update')->name('updateEvent');
+    });
 });
 
 // Route::get('/home', 'HomeController@index')->name('home');
